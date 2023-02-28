@@ -1,12 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import LandingPage from "./LandingPage";
-import reportWebVitals from "./reportWebVitals";
-import Staking from "./StakingPage";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import LandingPage from './LandingPage';
+import reportWebVitals from './reportWebVitals';
+import Staking from './StakingPage';
 import StateLogic from "./state";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <StateLogic>

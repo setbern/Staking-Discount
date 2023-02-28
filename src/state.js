@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { useState, createContext, useContext } from "react";
 
 export const StateContext = createContext(null);
 
@@ -13,8 +13,6 @@ const StateLogic = (props) => {
     authenticated,
     _authenticated,
   };
-
-  console.log("pools", pools);
 
   return (
     <StateContext.Provider value={{ ...contextValue }}>

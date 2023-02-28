@@ -11,7 +11,7 @@ function LandingPage() {
           <div className="flex items-center justify-center">
             <img className="h-[148px] justify-start ml-[50px]" src="/images/Strata-Logo.png" alt="" />
             <div className="flex flex-col -ml-14 -mt-8">
-              <h3 className="text-myGray text-2xl font-roboto font-medium">
+              <h3 className="text-myGray text-2xl  font-medium">
                 100+
               </h3>
               <p className="font-light text-myGray">

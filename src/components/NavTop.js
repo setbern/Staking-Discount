@@ -17,7 +17,7 @@ function NavTop() {
                     <ConnectWalletBtn />
                 </div>
             </div>
-            <NavInfo />
+            <NavInfoSubmit />
         </div>
     )
 }
