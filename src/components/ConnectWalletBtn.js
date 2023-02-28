@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
-import { connectWallet } from "../ConnectWallet";
+import React from 'react';
+import { useAppState } from '../state';
+import { useConnect } from '@stacks/connect-react';
+
 
 function ConnectWalletBtn() {
-  const [loading, setLoading] = useState(false);
+  const { authenticated, _authenticated, _senderAddress } = useAppState();
+  const { doOpenAuth } = useConnect();
 
-  const handleConnect = async () => {
-    setLoading(true);
-
-    try {
-      const { userData } = await connectWallet();
-      console.log("User data:", userData);
-      setLoading(false);
-    } catch (error) {
-      console.log("Error connecting wallet:", error.message);
-      setLoading(false);
-    }
+  const handleAuth = async () => {
+    doOpenAuth();
   };
 
-  return (
+  const handleLogout = () => {
+    _authenticated(false);
+    _senderAddress(undefined);
+
+    localStorage.removeItem('principal');
+  };
+
+  return authenticated ? (
+    <button
+      className="mr-[36px] border rounded-full h-10 w-40 bg-red-500 md:mr-[73px] md:text-[20px] md:h-15 md:w-56 text-white"
+      onClick={handleLogout}
+    >
+      Disconnect
+    </button>
+  ) : (
     <button
       className="mr-[36px] border rounded-full h-10 w-40 bg-[#5446F4] md:mr-[73px] md:text-[20px] md:h-15 md:w-56 text-white"
-      onClick={handleConnect}
-      disabled={loading}
+      onClick={handleAuth}
     >
-      {loading ? "Connecting..." : "Connect Wallet"}
+      Connect Wallet
     </button>
   );
 }

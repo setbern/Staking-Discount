@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import ConnectWallet from './ConnectWallet';
 import './index.css';
 import LandingPage from './LandingPage';
 import reportWebVitals from './reportWebVitals';
@@ -9,9 +10,11 @@ import StateLogic from "./state";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+  <ConnectWallet>
     <StateLogic>
       <Staking />
     </StateLogic>
+    </ConnectWallet>
   </React.StrictMode>
 );
 
