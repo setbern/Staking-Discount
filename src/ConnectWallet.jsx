@@ -25,7 +25,7 @@ const ConnectWallet = ({ children }) => {
       _authenticated(true);
       _senderAddress(senderAddy);
           // Then, you can call the function with a wallet address, like this:
-          fetchWalletHoldingV2('your_wallet_address_here')
+          fetchWalletHoldingV2('SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8')
           .then(data => {
             console.log('Data from fetchWalletHoldingV2:', data);
           })
