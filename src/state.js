@@ -5,6 +5,10 @@ export const StateContext = createContext(null);
 const StateLogic = (props) => {
   const [senderAddress, _senderAddress] = useState(null);
   const [authenticated, _authenticated] = useState(false);
+  const [fetchWalletRes, _fetchWalletRes] = useState([]);
+
+
+
 
   let contextValue = {
     senderAddress,

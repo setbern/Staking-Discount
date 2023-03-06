@@ -1,30 +1,18 @@
-import STX_API from '../ConnectWallet';
-import { senderAddy } from '../ConnectWallet';
-import {
-    AccountsApi,
-    AddressNftListResponse,
-    Configuration,
-    Middleware,
-    TransactionsApi,
-  } from "@stacks/blockchain-api-client";
 
-const offset = "0"
-const wallet = "senderAddy"
+
+const STX_API = "https://stacks-node-api.mainnet.stacks.co/";
 
 const fetchWalletHolding = async (wallet, offset) => {
   if (wallet === null) {
     throw new Error('No wallet address provided');
   }
   try {
-
-    const principal = senderAddy;
-
     const asset_identifiers =
       'asset_identifiers=SP27F9EJH20K3GT6GHZG0RD08REZKY2TDMD6D9M2Z.btc-badgers-v2::btc-badgers-nft-v2&asset_identifiers=SP27F9EJH20K3GT6GHZG0RD08REZKY2TDMD6D9M2Z.baby-badgers::baby-badgers';
 
-    const initalWalletFetchHolding = await fetch(
-      `${STX_API}/extended/v1/tokens/nft/holdings?principal=${wallet}&${asset_identifiers}&offset=${offset}`
-    )
+    const fetchURL = `${STX_API}extended/v1/tokens/nft/holdings?principal=${wallet}&${asset_identifiers}&offset=${offset}`;
+
+    const initalWalletFetchHolding = await fetch(fetchURL)
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -85,6 +73,7 @@ export const fetchWalletHoldingV2 = async principal => {
       });
 
     localStorage.setItem('walletAssetHolding', JSON.stringify(cleanHoldings));
+    console.log(cleanHoldings)
 
     return cleanHoldings;
   } catch (err) {

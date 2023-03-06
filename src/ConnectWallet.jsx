@@ -5,7 +5,7 @@ import { Connect } from '@stacks/connect-react';
 import { AppConfig, UserSession } from '@stacks/connect';
 import { fetchWalletHoldingV2 } from './components/FetchBadgers';
 
-export const STACKS_API = "https://stacks-node-api.mainnet.stacks.co/";
+export const STX_API = "https://stacks-node-api.mainnet.stacks.co/";
 
 const STACK_CLIENT_CONFIG = new AppConfig(['store_write', 'publish_data']);
 const STACKS_USER_SESSION = new UserSession({
@@ -13,11 +13,11 @@ const STACKS_USER_SESSION = new UserSession({
 });
 
 const ConnectWallet = ({ children }) => {
-  const { _authenticated, _senderAddress } = useAppState();
+  const { _authenticated, _senderAddress, _fetchWalletRes } = useAppState();
 
   const [loading, setLoading] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     const senderAddy = localStorage.getItem("principal");
 
     console.log("senderAddy", senderAddy);
@@ -25,7 +25,7 @@ const ConnectWallet = ({ children }) => {
     if (senderAddy) {
       _authenticated(true);
       _senderAddress(senderAddy);
-      // Then, you can call the function with a wallet address, like this:
+      
     }
   }, []);
 
