@@ -1,6 +1,15 @@
 import STX_API from '../ConnectWallet';
 import { senderAddy } from '../ConnectWallet';
+import {
+    AccountsApi,
+    AddressNftListResponse,
+    Configuration,
+    Middleware,
+    TransactionsApi,
+  } from "@stacks/blockchain-api-client";
 
+const offset = "0"
+const wallet = "senderAddy"
 
 const fetchWalletHolding = async (wallet, offset) => {
   if (wallet === null) {
@@ -11,10 +20,10 @@ const fetchWalletHolding = async (wallet, offset) => {
     const principal = senderAddy;
 
     const asset_identifiers =
-      'SP27F9EJH20K3GT6GHZG0RD08REZKY2TDMD6D9M2Z.btc-badgers-v2::btc-badgers-nft-v2&asset_identifiers=SP27F9EJH20K3GT6GHZG0RD08REZKY2TDMD6D9M2Z.baby-badgers::baby-badgers';
+      'asset_identifiers=SP27F9EJH20K3GT6GHZG0RD08REZKY2TDMD6D9M2Z.btc-badgers-v2::btc-badgers-nft-v2&asset_identifiers=SP27F9EJH20K3GT6GHZG0RD08REZKY2TDMD6D9M2Z.baby-badgers::baby-badgers';
 
     const initalWalletFetchHolding = await fetch(
-      `${STX_API}/extended/v1/tokens/nft/holdings?principal=${principal}&asset_identifiers=${asset_identifiers}&offset=${offset}`
+      `${STX_API}/extended/v1/tokens/nft/holdings?principal=${wallet}&${asset_identifiers}&offset=${offset}`
     )
       .then(res => {
         if (res.ok) {

@@ -17,24 +17,23 @@ const ConnectWallet = ({ children }) => {
 
   const [loading, setLoading] = useState(false);
 
-  useEffect(async () => {
-    const senderAddy = localStorage.getItem("principal");
-
-    console.log("senderAddy", senderAddy);
-    funcToRun();
+  useEffect(() => {
+    const senderAddy = localStorage.getItem('principal');
+    
+    console.log('senderAddy', senderAddy);
     if (senderAddy) {
       _authenticated(true);
       _senderAddress(senderAddy);
-      // Then, you can call the function with a wallet address, like this:
+          // Then, you can call the function with a wallet address, like this:
+          fetchWalletHoldingV2(senderAddy)
+          .then(data => {
+            console.log('Data from fetchWalletHoldingV2:', data);
+          })
+          .catch(error => {
+            console.log('Error from fetchWalletHoldingV2:', error);
+          });
     }
   }, []);
-
-  const funcToRun = async () => {
-    const fetchWalletRes = await fetchWalletHoldingV2(
-      "SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8"
-    );
-    console.log("fetchWalletRes", fetchWalletRes);
-  };
 
   const authOptions = {
     appDetails: {
