@@ -13,7 +13,7 @@ const STACKS_USER_SESSION = new UserSession({
 });
 
 const ConnectWallet = ({ children }) => {
-  const { _authenticated, _senderAddress } = useAppState();
+  const { _authenticated, _senderAddress, _fetchWalletRes } = useAppState();
 
   const [loading, setLoading] = useState(false);
 
@@ -31,9 +31,9 @@ const ConnectWallet = ({ children }) => {
 
   const funcToRun = async () => {
   const fetchWalletRes = await fetchWalletHoldingV2(senderAddy);
-
-  const firstImageURL = fetchWalletRes[0].image_url;
-  console.log(firstImageURL)
+  if (fetchWalletRes) {
+    _fetchWalletRes(fetchWalletRes);
+  }
 }
   
   useEffect(() => {

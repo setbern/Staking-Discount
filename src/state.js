@@ -16,6 +16,9 @@ const StateLogic = (props) => {
 
     authenticated,
     _authenticated,
+
+    fetchWalletRes,
+    _fetchWalletRes,
   };
 
   return (

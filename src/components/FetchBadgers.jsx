@@ -72,9 +72,6 @@ export const fetchWalletHoldingV2 = async principal => {
         return d.data;
       });
 
-    localStorage.setItem('walletAssetHolding', JSON.stringify(cleanHoldings));
-    console.log(cleanHoldings)
-
     return cleanHoldings;
   } catch (err) {
     console.log('we ran into an err with fetchWalletHoldingV2', err);
