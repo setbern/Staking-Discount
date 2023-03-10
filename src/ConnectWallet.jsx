@@ -13,7 +13,7 @@ const STACKS_USER_SESSION = new UserSession({
 });
 
 const ConnectWallet = ({ children }) => {
-  const { _authenticated, _senderAddress, _fetchWalletRes } = useAppState();
+  const { _authenticated, _senderAddress, _fetchWalletRes, fetchWalletRes } = useAppState();
 
   const [loading, setLoading] = useState(false);
 
@@ -21,24 +21,23 @@ const ConnectWallet = ({ children }) => {
     const senderAddy = localStorage.getItem("principal");
 
     console.log("senderAddy", senderAddy);
-    funcToRun();
+    
     if (senderAddy) {
+      funcToRun(senderAddy);
       _authenticated(true);
       _senderAddress(senderAddy);
       
     }
   }, []);
 
-  const funcToRun = async () => {
+  const funcToRun = async (senderAddy) => {
   const fetchWalletRes = await fetchWalletHoldingV2(senderAddy);
+  console.log(senderAddy)
   if (fetchWalletRes) {
     _fetchWalletRes(fetchWalletRes);
+    
   }
 }
-  
-  useEffect(() => {
-    funcToRun();
-  }, []);
 
   const authOptions = {
     appDetails: {
@@ -61,6 +60,7 @@ const ConnectWallet = ({ children }) => {
         setLoading(false);
   
         localStorage.setItem('principal', senderAddress);
+        funcToRun(senderAddress);
       } catch (err) {
         toast.error('Could Not Authenticate');
         setLoading(false);

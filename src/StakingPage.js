@@ -5,24 +5,26 @@ import NavTop from "./components/NavTop";
 import { useAppState } from "./state";
 
 function Staking() {
-  const { fetchWalletRes } = useAppState();
+  const { fetchWalletRes, selectedItems, _selectedItems } = useAppState();
 
   const gatewayUrl = "https://ipfs.io/ipfs/";
 
-  const [selectedItems, setSelectedItems] = useState([]);
-
   const handleItemClick = (item) => {
     const index = selectedItems.findIndex((i) => i.token_id === item.token_id);
-
+    const numSelected = selectedItems.length;
+  
     if (index === -1) {
-      setSelectedItems([...selectedItems, item]);
+      if (numSelected < 1) {
+        _selectedItems([...selectedItems, item]);
+      }
     } else {
-      setSelectedItems(selectedItems.filter((i) => i.token_id !== item.token_id));
+      _selectedItems(selectedItems.filter((i) => i.token_id !== item.token_id));
     }
   };
 
   const walletItems = fetchWalletRes.map((item, index) => {
     const imageUrl = item.token_metadata.image_url.replace("ipfs://", gatewayUrl);
+    console.log(imageUrl)
 
     const isSelected = selectedItems.some((i) => i.token_id === item.token_id);
 
@@ -32,7 +34,7 @@ function Staking() {
         className="relative mr-4 mb-4 h-[257px]"
         onClick={() => handleItemClick(item)}
       >
-        <img src={imageUrl} alt={item.token_id} className="h-full w-full object-cover rounded-lg transition-all duration-300 hover:scale-110" />
+         <img src={imageUrl} alt={item.token_id} className={`h-full w-full object-cover rounded-lg transition-all duration-300 hover:scale-110 ${isSelected ? "selected" : ""}`} />
         {isSelected && (
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[96px] h-[96px] rounded-full bg-[#190ADB] flex items-center justify-center">
             <img src="./images/VectorCheckMark.png"></img>

@@ -6,6 +6,9 @@ const StateLogic = (props) => {
   const [senderAddress, _senderAddress] = useState(null);
   const [authenticated, _authenticated] = useState(false);
   const [fetchWalletRes, _fetchWalletRes] = useState([]);
+  const [selectedItems, _selectedItems] = useState([]);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
 
 
 
@@ -19,6 +22,16 @@ const StateLogic = (props) => {
 
     fetchWalletRes,
     _fetchWalletRes,
+
+    selectedItems,
+    _selectedItems,
+
+    email,
+    setEmail,
+
+    emailError,
+    setEmailError,
+
   };
 
   return (

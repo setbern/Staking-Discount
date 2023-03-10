@@ -4,7 +4,7 @@ import { useConnect } from '@stacks/connect-react';
 
 
 function ConnectWalletBtn() {
-  const { authenticated, _authenticated, _senderAddress } = useAppState();
+  const { authenticated, _authenticated, _senderAddress, _fetchWalletRes, _selectedItems } = useAppState();
   const { doOpenAuth } = useConnect();
 
   const handleAuth = async () => {
@@ -14,6 +14,9 @@ function ConnectWalletBtn() {
   const handleLogout = () => {
     _authenticated(false);
     _senderAddress(undefined);
+    _fetchWalletRes([]);
+    _selectedItems([])
+
 
     localStorage.removeItem('principal');
   };
