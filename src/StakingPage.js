@@ -3,6 +3,7 @@ import "./App.css";
 import BadgerNfts from "./components/BadgerMenu";
 import NavTop from "./components/NavTop";
 import { useAppState } from "./state";
+import { stakeRequierements } from "./components/stakeRequirementes";
 
 function Staking() {
   const { fetchWalletRes, selectedItems, _selectedItems } = useAppState();
@@ -14,7 +15,7 @@ function Staking() {
     const numSelected = selectedItems.length;
   
     if (index === -1) {
-      if (numSelected < 1) {
+      if (numSelected < stakeRequierements) {
         _selectedItems([...selectedItems, item]);
       }
     } else {
@@ -49,7 +50,7 @@ function Staking() {
       <NavTop />
       <div className="mt-[64px] ml-[64px] mr-[64px] md:ml-[111px] md:mr-[111px]">
         <p className="text-center text-sm md:text-2xl">
-          Stake <span className="text-[#5446F4]">11</span> Badgers here to unlock a one-time 50% discount to the 100+ Days of Clarity Course. The number of Badgers to stake is decided by the floor price & USD/STX value (updated weekly).
+          Stake <span className="text-[#5446F4]">{stakeRequierements}</span> Badgers here to unlock a one-time 50% discount to the 100+ Days of Clarity Course. The number of Badgers to stake is decided by the floor price & USD/STX value (updated weekly).
         </p>
       </div>
       <BadgerNfts />

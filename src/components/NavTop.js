@@ -6,13 +6,14 @@ import NavInfoDaysLeft from "./unstakeNav/NavInfoDaysLeft";
 import NavInfo from "./NavInfo";
 import NavInfoStakeOver from "./unstakeSubmitNav/NavInfoStakeOver"
 import { useAppState } from "../state";
+import { stakeRequierements } from "./stakeRequirementes";
 
 function NavTop() {
   const { selectedItems } = useAppState();
 
   let navInfoComponent = <NavInfo />;
 
-  if (selectedItems.length === 1) {
+  if (selectedItems.length === stakeRequierements) {
     navInfoComponent = <NavInfoSubmit />;
   }
 

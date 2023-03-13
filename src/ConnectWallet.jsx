@@ -32,7 +32,7 @@ const ConnectWallet = ({ children }) => {
 
   const funcToRun = async (senderAddy) => {
   const fetchWalletRes = await fetchWalletHoldingV2(senderAddy);
-  console.log(senderAddy)
+  
   if (fetchWalletRes) {
     _fetchWalletRes(fetchWalletRes);
     
