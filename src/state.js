@@ -7,6 +7,7 @@ const StateLogic = (props) => {
   const [authenticated, _authenticated] = useState(false);
   const [fetchWalletRes, _fetchWalletRes] = useState([]);
   const [selectedItems, _selectedItems] = useState([]);
+  const [userStaked, _userStaked] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
 
@@ -25,6 +26,9 @@ const StateLogic = (props) => {
 
     selectedItems,
     _selectedItems,
+
+    userStaked,
+    _userStaked,
 
     email,
     setEmail,

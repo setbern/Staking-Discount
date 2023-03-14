@@ -25,7 +25,8 @@ function NavTop() {
           <ConnectWalletBtn />
         </div>
       </div>
-      {navInfoComponent}
+      {/* {navInfoComponent} */}
+      <NavInfoStakeOver />
     </div>
   );
 }

@@ -6,26 +6,23 @@ import { AnchorMode, PostConditionMode } from "@stacks/transactions";
 import { openContractCall } from "@stacks/connect";
 
 const contractAddress = "SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8"
-const contractName = "test-staking-badgers-quickly"
+const contractName = "staking-discount-quick-testing"
 const handleSuccesModel = ""
 
 function StakeBtnSubmit() {
   const { selectedItems, _selectedItems, senderAddress } = useAppState();
-  console.log(selectedItems)
   const btcBadgersItems = selectedItems.filter((item) => item.asset_id === "btc-badgers-nft-v2");
   const babyBadgersItems = selectedItems.filter((item) => item.asset_id === "baby-badgers");
 
   const btcBadgersTokenIds = btcBadgersItems.map((item) => uintCV(parseInt(item.token_id)));
   const babyBadgersTokenIds = babyBadgersItems.map((item) => uintCV(parseInt(item.token_id)));
-
-  
+  console.log(btcBadgersItems)
 
 const args = [listCV(btcBadgersTokenIds), listCV(babyBadgersTokenIds)];
 
   const handleStake = async () => {
     try {
       const args = [listCV(babyBadgersTokenIds), listCV(btcBadgersTokenIds)];
-      console.log(PostConditionMode.Allow)
 
       const txOptions = {
         contractAddress: contractAddress,
@@ -40,7 +37,6 @@ const args = [listCV(btcBadgersTokenIds), listCV(babyBadgersTokenIds)];
         postConditionMode: PostConditionMode.Allow,
         onFinish: (data) => {
           
-          console.log(txOptions)
           return;
         },
         onCancel: () => {

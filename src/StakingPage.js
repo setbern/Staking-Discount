@@ -25,7 +25,6 @@ function Staking() {
 
   const walletItems = fetchWalletRes.map((item, index) => {
     const imageUrl = item.token_metadata.image_url.replace("ipfs://", gatewayUrl);
-    console.log(imageUrl)
 
     const isSelected = selectedItems.some((i) => i.token_id === item.token_id);
 
