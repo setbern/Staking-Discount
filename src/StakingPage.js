@@ -7,9 +7,12 @@ import { stakeRequierements } from "./components/stakeRequirementes";
 import Paragraph from "./components/paragraph";
 import ParagraphStakeOver from "./components/stakedBeforeNav/paragraphStakeOver";
 
+const STX_API = "https://stacks-node-api.mainnet.stacks.co/";
+
 function Staking() {
   const { fetchWalletRes, selectedItems, _selectedItems, listBabyBadgerState, listBadgerState, userStaked, senderAddress } = useAppState();
   console.log(selectedItems)
+  console.log(fetch)
 
   const gatewayUrl = "https://ipfs.io/ipfs/";
 
@@ -28,6 +31,7 @@ function Staking() {
 
   const walletItems = fetchWalletRes.map((item, index) => {
     const imageUrl = item.token_metadata.image_url.replace("ipfs://", gatewayUrl);
+    console.log(imageUrl)
 
     const isSelected = selectedItems.some((i) => i.token_id === item.token_id);
 
@@ -47,6 +51,46 @@ function Staking() {
     );
   });
 
+  const mapItemsBadgers = listBadgerState.map((item, index) => {
+    const imageBadger = item.value
+    const imageUrlBadger = `https://ipfs.io/ipfs/QmQbyehKTTczgB7n7GwVcLir9tmtRKEtrag3M8FEcKhvTT/bitcoin_badger_${imageBadger}.gif`;
+    console.log("This is it", imageBadger)
+    console.log("This is it the URL", imageUrlBadger)
+
+    return (
+      <div
+        key={index}
+        className="relative mr-4 mb-4 h-[257px]"
+      >
+         <img src={imageUrlBadger} alt={item.value} className="h-full w-full object-cover rounded-lg transition-all duration-300 hover:scale-110" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[96px] h-[96px] rounded-full bg-[#190ADB] flex items-center justify-center">
+            <img src="./images/VectorCheckMark.png"></img>
+          </div>
+       
+      </div>
+    );
+  });
+
+  const mapItemsBabyBadgers = listBabyBadgerState.map((item, index) => {
+    const imageBabyBadger = item.value
+    const imageUrlBabyBadger = `https://ipfs.io/ipfs/QmQbyehKTTczgB7n7GwVcLir9tmtRKEtrag3M8FEcKhvTT/baby_badger_${imageBabyBadger}.gif`;
+    console.log("This is it", imageBabyBadger)
+    console.log("This is it the URL", imageUrlBabyBadger)
+
+    return (
+      <div
+        key={index}
+        className="relative mr-4 mb-4 h-[257px]"
+      >
+         <img src={imageUrlBabyBadger} alt={item.value} className="h-full w-full object-cover rounded-lg transition-all duration-300 hover:scale-110" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[96px] h-[96px] rounded-full bg-[#190ADB] flex items-center justify-center">
+            <img src="./images/VectorCheckMark.png"></img>
+          </div>
+       
+      </div>
+    );
+  });
+
   return (
     <>
       <NavTop />
@@ -59,7 +103,9 @@ function Staking() {
       </div>
       <BadgerNfts />
       {fetchWalletRes.length > 0 ? (
-        <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{walletItems}</div>
+        <><div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{walletItems}</div>
+        <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{mapItemsBadgers}</div>
+        <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{mapItemsBabyBadgers}</div></>
       ) : (
         <div className="flex flex-col items-center justify-center w-full mt-[100px]">
         <p className="text-[40px] font-bold">No Badgers to display</p>
