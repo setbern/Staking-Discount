@@ -6,7 +6,7 @@ import { AnchorMode, PostConditionMode } from "@stacks/transactions";
 import { openContractCall } from "@stacks/connect";
 
 const contractAddress = "SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8"
-const contractName = "staking-discount-quick-testing"
+const contractName = "staking-discount-quick-testing-3"
 const handleSuccesModel = ""
 
 function StakeBtnSubmit() {

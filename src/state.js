@@ -8,6 +8,9 @@ const StateLogic = (props) => {
   const [fetchWalletRes, _fetchWalletRes] = useState([]);
   const [selectedItems, _selectedItems] = useState([]);
   const [userStaked, _userStaked] = useState(false);
+  const [timeToUnstake, _timeToUnstake] = useState(null);
+  const [listBadgerState, _listBadgerState] = useState([]);
+  const [listBabyBadgerState, _listBabyBadgerState] = useState([]);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
 
@@ -29,6 +32,15 @@ const StateLogic = (props) => {
 
     userStaked,
     _userStaked,
+
+    timeToUnstake,
+    _timeToUnstake,
+
+    listBadgerState,
+    _listBadgerState,
+
+    listBabyBadgerState,
+    _listBabyBadgerState,
 
     email,
     setEmail,

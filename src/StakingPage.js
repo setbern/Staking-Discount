@@ -4,9 +4,12 @@ import BadgerNfts from "./components/BadgerMenu";
 import NavTop from "./components/NavTop";
 import { useAppState } from "./state";
 import { stakeRequierements } from "./components/stakeRequirementes";
+import Paragraph from "./components/paragraph";
+import ParagraphStakeOver from "./components/stakedBeforeNav/paragraphStakeOver";
 
 function Staking() {
-  const { fetchWalletRes, selectedItems, _selectedItems } = useAppState();
+  const { fetchWalletRes, selectedItems, _selectedItems, listBabyBadgerState, listBadgerState, userStaked, senderAddress } = useAppState();
+  console.log(selectedItems)
 
   const gatewayUrl = "https://ipfs.io/ipfs/";
 
@@ -48,9 +51,11 @@ function Staking() {
     <>
       <NavTop />
       <div className="mt-[64px] ml-[64px] mr-[64px] md:ml-[111px] md:mr-[111px]">
-        <p className="text-center text-sm md:text-2xl">
-          Stake <span className="text-[#5446F4]">{stakeRequierements}</span> Badgers here to unlock a one-time 50% discount to the 100+ Days of Clarity Course. The number of Badgers to stake is decided by the floor price & USD/STX value (updated weekly).
-        </p>
+      {listBabyBadgerState.length === 0 && listBadgerState.length === 0 && userStaked ? (
+          <ParagraphStakeOver />
+        ) : (
+          <Paragraph />
+        )}
       </div>
       <BadgerNfts />
       {fetchWalletRes.length > 0 ? (
