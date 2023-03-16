@@ -71,7 +71,7 @@ const getMap = async (senderAddy) => {
   _listBadgerState(listBadgers)
   const listBabyBadgers = jsonResponse.value.value["staked-baby"].value
   _listBabyBadgerState(listBabyBadgers)
-  const listBabyBadgersUints = jsonResponse.value.value
+  const listBabyBadgersUints = jsonResponse.value.valuew
 
   
 };
