@@ -15,7 +15,7 @@ function DropMenu() {
       <div className="relative">
         <button
           type="button"
-          className="inline-flex justify-between w-[211px] rounded-full border shadow-sm px-4 py-[10px] bg-[#9C95F8] bg-opacity-[.34] text-sm font-medium text-black hover:bg-purple-300"
+          className="inline-flex items-center justify-between w-[100px] text-[6px] md:w-[211px] rounded-full border shadow-sm px-4 py-[10px] bg-[#9C95F8] bg-opacity-[.34] md:text-sm font-medium text-black hover:bg-purple-300"
           id="options-menu"
           aria-haspopup="true"
           aria-expanded="true"

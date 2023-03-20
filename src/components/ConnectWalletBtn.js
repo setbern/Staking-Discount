@@ -28,14 +28,14 @@ function ConnectWalletBtn() {
 
   return authenticated ? (
     <button
-      className="mr-[36px] border rounded-full h-10 w-20 bg-slate-700 md:mr-[73px] md:text-[20px] md:h-15 md:w-36 text-white font-light"
+      className="mr-[36px] border rounded-full h-10 w-20 text-[10px] bg-slate-700 md:mr-[73px] md:text-[20px] md:h-15 md:w-36 text-white font-light"
       onClick={handleLogout}
     >
       logout
     </button>
   ) : (
     <button
-      className="mr-[36px] border rounded-full h-10 w-40 bg-[#5446F4] md:mr-[73px] md:text-[20px] md:h-15 md:w-56 text-white"
+      className="mr-[36px] border rounded-full h-10 w-24 text-[10px] bg-[#5446F4] md:mr-[73px] md:text-[20px] md:h-15 md:w-56 text-white"
       onClick={handleAuth}
     >
       Connect Wallet

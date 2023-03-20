@@ -113,7 +113,7 @@ function Staking() {
         <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{mapItemsBabyBadgers}</div></>
       ) : (
         <div className="flex flex-col items-center justify-center w-full mt-[100px]">
-        <p className="text-[40px] font-bold">No Badgers to display</p>
+        <p className="text-[20px] md:text-[40px] font-bold">No Badgers to display</p>
         </div>
       )}
     </>
