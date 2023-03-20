@@ -11,7 +11,7 @@ function DropMenu() {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-between items-center">
       <div className="relative">
         <button
           type="button"
