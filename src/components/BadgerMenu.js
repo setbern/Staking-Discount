@@ -7,7 +7,7 @@ function BadgerNfts() {
   return (
     <div className="flex items-center justify-between bg-gradient-br-tl ml-[64px] mr-[64px] h-14 rounded-2xl mt-10 md:ml-[111px] md:mr-[111px]">
         <div className="flex ml-5">
-            <h2 className="font-bold text-xs md:text-lg">Your Badger NFTs</h2>
+            <h2 className="font-bold text-[8px] md:text-lg">Your Badger NFTs</h2>
         </div>
         <div className='mr-10'>
             <DropMenu />
