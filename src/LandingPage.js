@@ -21,7 +21,7 @@ function LandingPage() {
           </div>
         </div>
       </div>
-      <h2 className="text-3xl mt-16 font-bold md:text-[50px]">
+      <h2 className="text-2xl mt-16 font-bold md:text-[50px]">
         <span className="text-myPurple">Badgers</span><span className="text-black">Build Discount</span>
       </h2>
       <div className='flex flex-col items-center mt-5'>
