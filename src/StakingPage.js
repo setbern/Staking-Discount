@@ -6,6 +6,7 @@ import { useAppState } from "./state";
 import { stakeRequierements } from "./components/stakeRequirementes";
 import Paragraph from "./components/paragraph";
 import ParagraphStakeOver from "./components/stakedBeforeNav/paragraphStakeOver";
+import ParagraphStaked from "./components/unstakeNav/paragraphStaked";
 
 
 function Staking() {
@@ -100,17 +101,20 @@ function Staking() {
     <>
       <NavTop />
       <div className="mt-[64px] ml-[64px] mr-[64px] md:ml-[111px] md:mr-[111px]">
-      {listBabyBadgerState.length === 0 && listBadgerState.length === 0 && userStaked ? (
-          <ParagraphStakeOver />
+        {listBabyBadgerState.length === 0 && listBadgerState.length === 0 && userStaked ? (
+        <ParagraphStakeOver />
+        ) : listBabyBadgerState.length >= 1 || listBadgerState.length >= 1 && userStaked ? (
+          <ParagraphStaked />
         ) : (
           <Paragraph />
         )}
       </div>
       <BadgerNfts />
       {fetchWalletRes.length > 0 || listBadgerState.length > 0 || listBabyBadgerState.length > 0 ? (
-        <><div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{walletItems}</div>
-        <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{mapItemsBadgers}</div>
-        <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{mapItemsBabyBadgers}</div></>
+        <><div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{mapItemsBadgers}</div>
+        <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{mapItemsBabyBadgers}</div>
+        <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{walletItems}</div>
+        </>
       ) : (
         <div className="flex flex-col items-center justify-center w-full mt-[100px]">
         <p className="text-[20px] md:text-[40px] font-bold">No Badgers to display</p>

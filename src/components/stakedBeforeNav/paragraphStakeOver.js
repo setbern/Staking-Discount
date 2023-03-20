@@ -1,5 +1,4 @@
 import React from 'react';
-import { stakeRequierements } from "../stakeRequirementes";
 
 function ParagraphStakeOver() {
 
