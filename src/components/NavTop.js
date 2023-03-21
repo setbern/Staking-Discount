@@ -43,6 +43,7 @@ function NavTop() {
         </div>
       </div>
       {navInfoComponent}
+      {/* <NavInfo /> */}
       {/* <NavInfoSubmit /> */}
       {/* <NavInfoDaysLeft /> */}
       {/* <StakedBefore /> */}

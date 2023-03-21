@@ -10,9 +10,13 @@ import ParagraphStaked from "./components/unstakeNav/paragraphStaked";
 
 
 function Staking() {
-  const { fetchWalletRes, selectedItems, _selectedItems, listBabyBadgerState, listBadgerState, userStaked, senderAddress } = useAppState();
+  const { fetchWalletRes, selectedItems, _selectedItems, listBabyBadgerState, listBadgerState, userStaked, senderAddress, badgers, babyBadgers } = useAppState();
   console.log(selectedItems)
-  console.log(fetchWalletRes)
+  console.log("WalletRes", fetchWalletRes)
+  const btcBadgersItems = fetchWalletRes.filter((item) => item.asset_id === "btc-badgers-nft-v2");
+  console.log("badgers", btcBadgersItems)
+  const babyBadgersItems = fetchWalletRes.filter((item) => item.asset_id === "baby-badgers");
+  console.log("baby badgers", babyBadgersItems)
 
   const gatewayUrl = "https://ipfs.io/ipfs/";
 
@@ -20,7 +24,7 @@ function Staking() {
     const index = selectedItems.findIndex((i) => i.token_id === item.token_id);
     const numSelected = selectedItems.length;
   
-    if (!userStaked) { // added condition to check if userStaked is false
+    if (userStaked) { 
       if (index === -1) {
         if (numSelected < stakeRequierements) {
           _selectedItems([...selectedItems, item]);
@@ -31,11 +35,11 @@ function Staking() {
     }
   };
 
-  const walletItems = fetchWalletRes.map((item, index) => {
+  const walletBadgerItems = btcBadgersItems.map((item, index) => {
     const imageUrl = item.token_metadata.image_url.replace("ipfs://", gatewayUrl);
     console.log(imageUrl)
 
-    const isSelected = !userStaked && selectedItems.some((i) => i.token_id === item.token_id);
+    const isSelected = userStaked && selectedItems.some((i) => i.token_id === item.token_id);
 
     return (
       <div
@@ -44,6 +48,34 @@ function Staking() {
         onClick={() => handleItemClick(item)}
       >
          <img src={imageUrl} alt={item.token_id} className={`h-full w-full object-cover rounded-lg transition-all duration-300 hover:scale-110 ${isSelected ? "selected" : ""}`} />
+        {isSelected && (
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[96px] h-[96px] rounded-full bg-[#190ADB] flex items-center justify-center">
+            <img src="./images/VectorCheckMark.png"></img>
+          </div>
+        )}
+      </div>
+    );
+  });
+
+  const walletBabyBadgerItems = babyBadgersItems.map((item, index) => {
+    const imageUrl = item.token_metadata.image_url.replace("ipfs://", gatewayUrl);
+    console.log(imageUrl);
+  
+    const isSelected = userStaked && selectedItems.some((i) => i.token_id === item.token_id);
+  
+    return (
+      <div
+        key={index}
+        className="relative mr-4 mb-4 h-[257px]"
+        onClick={() => handleItemClick(item)}
+      >
+        <img
+          src={imageUrl}
+          alt={item.token_id}
+          className={`h-full w-full object-cover rounded-lg transition-all duration-300 hover:scale-110 ${
+            isSelected ? "selected" : ""
+          }`}
+        />
         {isSelected && (
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[96px] h-[96px] rounded-full bg-[#190ADB] flex items-center justify-center">
             <img src="./images/VectorCheckMark.png"></img>
@@ -102,7 +134,7 @@ function Staking() {
       <NavTop />
       <div className="mt-[64px] ml-[64px] mr-[64px] md:ml-[111px] md:mr-[111px]">
         {listBabyBadgerState.length === 0 && listBadgerState.length === 0 && userStaked ? (
-        <ParagraphStakeOver />
+          <ParagraphStakeOver />
         ) : listBabyBadgerState.length >= 1 || listBadgerState.length >= 1 && userStaked ? (
           <ParagraphStaked />
         ) : (
@@ -111,17 +143,32 @@ function Staking() {
       </div>
       <BadgerNfts />
       {fetchWalletRes.length > 0 || listBadgerState.length > 0 || listBabyBadgerState.length > 0 ? (
-        <><div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{mapItemsBadgers}</div>
-        <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{mapItemsBabyBadgers}</div>
-        <div className="flex flex-wrap max-w-full mx-auto justify-center mt-8 ml-[50px] mr-[50px]">{walletItems}</div>
+        <>
+          {(badgers && !babyBadgers) && (
+            <><div className="flex flex-wrap max-w-full mx-auto justify-center mt-10 ml-[50px] mr-[50px]">{mapItemsBadgers}</div>
+            <div className="flex flex-wrap max-w-full mx-auto justify-center mt-10 ml-[50px] mr-[50px]">{walletBadgerItems}</div></>
+          )}
+          {(!badgers && babyBadgers) && (
+            <><div className="flex flex-wrap max-w-full mx-auto justify-center mt-10 ml-[50px] mr-[50px]">{mapItemsBabyBadgers}</div>
+            <div className="flex flex-wrap max-w-full mx-auto justify-center mt-10 ml-[50px] mr-[50px]">{walletBabyBadgerItems}</div></>
+          )}
+          {(!badgers && !babyBadgers) && (
+            <>
+              <div className="flex flex-wrap max-w-full mx-auto justify-center mt-10 ml-[50px] mr-[50px]">{mapItemsBadgers}</div>
+              <div className="flex flex-wrap max-w-full mx-auto justify-center mt-10 ml-[50px] mr-[50px]">{mapItemsBabyBadgers}</div>
+              <div className="flex flex-wrap max-w-full mx-auto justify-center mt-10 ml-[50px] mr-[50px]">{walletBadgerItems}</div>
+              <div className="flex flex-wrap max-w-full mx-auto justify-center mt-10 ml-[50px] mr-[50px]">{walletBabyBadgerItems}</div>
+            </>
+          )}
         </>
       ) : (
         <div className="flex flex-col items-center justify-center w-full mt-[100px]">
-        <p className="text-[20px] md:text-[40px] font-bold">No Badgers to display</p>
+          <p className="text-[20px] md:text-[40px] font-bold">No Badgers to display</p>
         </div>
       )}
     </>
   );
+  
 }
 
 export default Staking;

@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
+import { useAppState } from '../state';
 
 function DropMenu() {
   const [showMenu, setShowMenu] = useState(false);
   const [rotate, setRotate] = useState(false);
+  const { fetchWalletRes, selectedItems, _selectedItems, listBabyBadgerState, listBadgerState, userStaked, senderAddress, _badgers, _babyBadgers, badgers, babyBadgers } = useAppState();
 
+  const handleAllCollectionsClick = () => {
+    _badgers(false);
+    _babyBadgers(false);
+  };
+
+  const handleBadgersClick = () => {
+    _badgers(true);
+    _babyBadgers(false);
+  };
+
+  const handleBabyBadgersClick = () => {
+    _badgers(false);
+    _babyBadgers(true);
+  };
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -49,17 +65,27 @@ function DropMenu() {
             aria-labelledby="options-menu"
           >
             <div className="py-1" role="none">
+            <a
+                href="#"
+                className="block px-4 text-sm text-gray-700 hover:bg-purple-300 hover:text-gray-900"
+                role="menuitem"
+                onClick={handleAllCollectionsClick}
+              >
+                All Collections
+              </a>
               <a
                 href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-300 hover:text-gray-900"
+                className="block px-4 text-sm text-gray-700 hover:bg-purple-300 hover:text-gray-900"
                 role="menuitem"
+                onClick={handleBadgersClick}
               >
                 Badgers
               </a>
               <a
                 href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-300 hover:text-gray-900"
+                className="block px-4 text-sm text-gray-700 hover:bg-purple-300 hover:text-gray-900"
                 role="menuitem"
+                onClick={handleBabyBadgersClick}
               >
                 Baby Badgers
               </a>

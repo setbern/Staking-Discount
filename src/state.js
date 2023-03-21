@@ -11,6 +11,8 @@ const StateLogic = (props) => {
   const [timeToUnstake, _timeToUnstake] = useState(null);
   const [listBadgerState, _listBadgerState] = useState([]);
   const [listBabyBadgerState, _listBabyBadgerState] = useState([]);
+  const [badgers, _badgers] = useState(false);
+  const [babyBadgers, _babyBadgers] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
 
@@ -41,6 +43,12 @@ const StateLogic = (props) => {
 
     listBabyBadgerState,
     _listBabyBadgerState,
+
+    badgers,
+    _badgers,
+
+    babyBadgers,
+    _babyBadgers,
 
     email,
     setEmail,
