@@ -24,7 +24,7 @@ function Staking() {
     const index = selectedItems.findIndex((i) => i.token_id === item.token_id);
     const numSelected = selectedItems.length;
   
-    if (userStaked) { 
+    if (!userStaked) { 
       if (index === -1) {
         if (numSelected < stakeRequierements) {
           _selectedItems([...selectedItems, item]);
@@ -39,7 +39,7 @@ function Staking() {
     const imageUrl = item.token_metadata.image_url.replace("ipfs://", gatewayUrl);
     console.log(imageUrl)
 
-    const isSelected = userStaked && selectedItems.some((i) => i.token_id === item.token_id);
+    const isSelected = !userStaked && selectedItems.some((i) => i.token_id === item.token_id);
 
     return (
       <div
@@ -61,7 +61,7 @@ function Staking() {
     const imageUrl = item.token_metadata.image_url.replace("ipfs://", gatewayUrl);
     console.log(imageUrl);
   
-    const isSelected = userStaked && selectedItems.some((i) => i.token_id === item.token_id);
+    const isSelected = !userStaked && selectedItems.some((i) => i.token_id === item.token_id);
   
     return (
       <div

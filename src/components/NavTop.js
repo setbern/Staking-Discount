@@ -18,6 +18,33 @@ function NavTop() {
   console.log("BabyBadgerState:", listBabyBadgerState)
   console.log("BadgerState:", listBadgerState)
 
+  const fetchWalletTransaction = async (senderAddress) => {
+    if (senderAddress === null) {
+      throw new Error('No wallet address provided');
+    }
+    try {
+  
+        const transactionAPI = `https://stacks-node-api.mainnet.stacks.co/extended/v1/address/${senderAddress}/transactions`;
+  
+        const transactionFetch = await fetch(transactionAPI)
+        .then(res => {
+          if (res.ok) {
+            return res.json();
+          }
+          throw res;
+        })
+        .then(data => {
+          return data;
+        });
+  
+      return transactionFetch;
+      console.log("transaction JSON", transactionFetch)
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
+    }
+  };
+
   let navInfoComponent;
 
   if (listBabyBadgerState.length === 0 && listBadgerState.length === 0 && (userStaked)) {
