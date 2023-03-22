@@ -5,7 +5,7 @@ import { AnchorMode, PostConditionMode, principalCV } from "@stacks/transactions
 import { openContractCall } from "@stacks/connect";
 
 const contractAddress = "SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8"
-const contractName = "staking-discount-quick-testing-3"
+const contractName = "badgers-build-discount"
 const handleSuccesModel = ""
 
 function UnStakeBtn() {

@@ -28,7 +28,7 @@ function NavTop() {
     navInfoComponent = <TxSubmitted />;
   } else if (senderAddress === null) {
     navInfoComponent = <NavInfo />;
-  } else if (Number(timeToUnstake) > 0 && Number(timeToUnstake) !== 103 && Number(timeToUnstake) !== 105) {
+  } else if (Number(timeToUnstake) > 0 && Number(timeToUnstake) !== 100003 && Number(timeToUnstake) !== 100005) {
     navInfoComponent = <NavInfoDaysLeft />;
   } else if (selectedItems.length === stakeRequierements) {
     navInfoComponent = <NavInfoSubmit />;

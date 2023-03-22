@@ -8,7 +8,7 @@ function NavInfo() {
   const blocksLeft = Number(timeToUnstake);
 
   let displayBlocksLeft = blocksLeft;
-  if (blocksLeft === 103) {
+  if (blocksLeft === 100003) {
     displayBlocksLeft = 0;
   }
 
