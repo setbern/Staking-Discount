@@ -7,10 +7,11 @@ import { stakeRequierements } from "./components/stakeRequirementes";
 import Paragraph from "./components/paragraph";
 import ParagraphStakeOver from "./components/stakedBeforeNav/paragraphStakeOver";
 import ParagraphStaked from "./components/unstakeNav/paragraphStaked";
+import ParagraphTxSubmitted from "./components/TxSubmitted/paragraphTxSubmitted";
 
 
 function Staking() {
-  const { fetchWalletRes, selectedItems, _selectedItems, listBabyBadgerState, listBadgerState, userStaked, senderAddress, badgers, babyBadgers } = useAppState();
+  const { fetchWalletRes, selectedItems, _selectedItems, listBabyBadgerState, listBadgerState, userStaked, senderAddress, badgers, babyBadgers, mempool } = useAppState();
   console.log(selectedItems)
   console.log("WalletRes", fetchWalletRes)
   const btcBadgersItems = fetchWalletRes.filter((item) => item.asset_id === "btc-badgers-nft-v2");
@@ -137,9 +138,11 @@ function Staking() {
           <ParagraphStakeOver />
         ) : listBabyBadgerState.length >= 1 || listBadgerState.length >= 1 && userStaked ? (
           <ParagraphStaked />
-        ) : (
+        ) : mempool === "0" ? ( 
+          <ParagraphTxSubmitted />
+        ) : ( 
           <Paragraph />
-        )}
+        ) }
       </div>
       <BadgerNfts />
       {fetchWalletRes.length > 0 || listBadgerState.length > 0 || listBabyBadgerState.length > 0 ? (

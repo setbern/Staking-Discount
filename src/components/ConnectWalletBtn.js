@@ -4,7 +4,7 @@ import { useConnect } from '@stacks/connect-react';
 
 
 function ConnectWalletBtn() {
-  const { authenticated, _authenticated, _senderAddress, _fetchWalletRes, _selectedItems, _userStaked, _timeToUnstake, _listBadgerState, _listBabyBadgerState } = useAppState();
+  const { authenticated, _authenticated, _senderAddress, _fetchWalletRes, _selectedItems, _userStaked, _timeToUnstake, _listBadgerState, _listBabyBadgerState, _mempool } = useAppState();
   const { doOpenAuth } = useConnect();
 
   const handleAuth = async () => {
@@ -20,6 +20,7 @@ function ConnectWalletBtn() {
     _timeToUnstake(null);
     _listBabyBadgerState([]);
     _listBadgerState([]);
+    _mempool("");
 
 
 

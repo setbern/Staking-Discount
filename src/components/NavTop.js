@@ -9,46 +9,23 @@ import { useAppState } from "../state";
 import { stakeRequierements } from "./stakeRequirementes";
 import StakedBefore from "./stakedBeforeNav/StakedBefore";
 import { senderAddy } from "../ConnectWallet";
+import TxSubmitted from "./TxSubmitted/TxSubmitted";
 
 
 function NavTop() {
-  const { selectedItems, userStaked, timeToUnstake, senderAddress, listBabyBadgerState, listBadgerState } = useAppState();
+  const { selectedItems, userStaked, timeToUnstake, senderAddress, listBabyBadgerState, listBadgerState, mempool } = useAppState();
   console.log("userStaked:", userStaked);
   console.log("timeToUnstake:", timeToUnstake);
   console.log("BabyBadgerState:", listBabyBadgerState)
   console.log("BadgerState:", listBadgerState)
-
-  const fetchWalletTransaction = async (senderAddress) => {
-    if (senderAddress === null) {
-      throw new Error('No wallet address provided');
-    }
-    try {
-  
-        const transactionAPI = `https://stacks-node-api.mainnet.stacks.co/extended/v1/address/${senderAddress}/transactions`;
-  
-        const transactionFetch = await fetch(transactionAPI)
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          throw res;
-        })
-        .then(data => {
-          return data;
-        });
-  
-      return transactionFetch;
-      console.log("transaction JSON", transactionFetch)
-    } catch (err) {
-      console.log(err);
-      throw new Error(err);
-    }
-  };
+  console.log("Mempool status in nav top", mempool)
 
   let navInfoComponent;
 
   if (listBabyBadgerState.length === 0 && listBadgerState.length === 0 && (userStaked)) {
     navInfoComponent = <StakedBefore />;
+  } else if (mempool === "0") {
+    navInfoComponent = <TxSubmitted />;
   } else if (senderAddress === null) {
     navInfoComponent = <NavInfo />;
   } else if (Number(timeToUnstake) > 0 && Number(timeToUnstake) !== 103 && Number(timeToUnstake) !== 105) {
@@ -59,7 +36,7 @@ function NavTop() {
     navInfoComponent = <NavInfo />;
   } else if (userStaked) {
     navInfoComponent = <NavInfoStakeOver />;
-  }
+  } 
 
   return (
     <div className="flex flex-col w-full h-96 bg-gradient-br-tl">

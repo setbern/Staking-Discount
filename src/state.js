@@ -13,6 +13,7 @@ const StateLogic = (props) => {
   const [listBabyBadgerState, _listBabyBadgerState] = useState([]);
   const [badgers, _badgers] = useState(false);
   const [babyBadgers, _babyBadgers] = useState(false);
+  const [mempool, _mempool] = useState("")
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
 
@@ -49,6 +50,9 @@ const StateLogic = (props) => {
 
     babyBadgers,
     _babyBadgers,
+
+    mempool,
+    _mempool,
 
     email,
     setEmail,
