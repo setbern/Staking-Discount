@@ -80,7 +80,7 @@ function Staking() {
     console.log(imageUrl);
 
     const isSelected =
-      userStaked && selectedItems.some((i) => i.token_id === item.token_id);
+      !userStaked && selectedItems.some((i) => i.token_id === item.token_id);
 
     return (
       <div

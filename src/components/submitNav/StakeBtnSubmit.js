@@ -68,7 +68,7 @@ function StakeBtnSubmit() {
         // perform any necessary actions with valid email
       } else {
         setIsValid(false);
-        setErr("Please enter a valid email address");
+        // setErr("Please enter a valid email address");
 
         return;
       }

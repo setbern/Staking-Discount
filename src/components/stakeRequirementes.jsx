@@ -1,1 +1,1 @@
-export const stakeRequierements = 1;
+export const stakeRequierements = 2;
