@@ -180,9 +180,9 @@ const getTimeToUnstake = async (senderAddy) => {
   
         localStorage.setItem('principal', senderAddress);
         funcToRun(senderAddress);
-        await getMap(senderAddress);
-        await getTimeToUnstake(senderAddress);
-        await fetchWalletTransaction(senderAddress);
+        getMap(senderAddress);
+        getTimeToUnstake(senderAddress);
+        fetchWalletTransaction(senderAddress);
 
       } catch (err) {
         toast.error('Could Not Authenticate');
