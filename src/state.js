@@ -16,9 +16,6 @@ const StateLogic = (props) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
 
-
-
-
   let contextValue = {
     senderAddress,
     _senderAddress,
@@ -55,9 +52,9 @@ const StateLogic = (props) => {
 
     emailError,
     setEmailError,
-
   };
 
+  console.log("selectedItem", selectedItems);
   return (
     <StateContext.Provider value={{ ...contextValue }}>
       {props.children}

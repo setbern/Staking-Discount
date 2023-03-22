@@ -56,22 +56,7 @@ function EmailSubmit() {
     }
   };
 
-  return (
-    <div className="">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email"></label>
-        <input
-          type="text"
-          id="email"
-          placeholder="test@test.com"
-          className="border border-purple-600 rounded-full py-1 text-center font-bold text-black mb-1.5 mt-4"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        {!isValid && <span>!</span>}
-      </form>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default EmailSubmit;
