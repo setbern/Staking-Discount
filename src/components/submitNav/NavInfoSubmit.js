@@ -1,6 +1,5 @@
 import React from "react";
 import NavBottom from "../NavBottom";
-import EmailSubmit from "./EmailSubmit";
 import StakeBtnSubmit from "./StakeBtnSubmit";
 
 function NavInfoSubmit() {
@@ -16,7 +15,7 @@ function NavInfoSubmit() {
 
         <StakeBtnSubmit />
       </div>
-      <div>
+      <div className="-mt-4">
         <NavBottom className="h-[90px] md:h-16" />
       </div>
     </>
