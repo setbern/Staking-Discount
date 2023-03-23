@@ -60,7 +60,7 @@ const ConnectWallet = ({ children }) => {
   
       // Find a transaction with the specified contract_id and function_name
       const targetTransaction = transactionFetch.results.find(tx => {
-        return tx.contract_call.contract_id === "SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8.badgers-build-discount"
+        return tx.contract_call.contract_id === "SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8.badgers-staking-discount"
           && tx.contract_call.function_name === "stake-for-discount";
       });
   
@@ -96,7 +96,7 @@ const ConnectWallet = ({ children }) => {
 const getMap = async (senderAddy) => {
   const network = new StacksMainnet();
   const contractAddress = 'SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8';
-  const contractName = 'badgers-build-discount';
+  const contractName = 'badgers-staking-discount';
   const functionName = 'get-staked-by-user';
   const functionArgs = [principalCV(senderAddy)];
   const senderAddress = senderAddy;
@@ -129,7 +129,7 @@ const getMap = async (senderAddy) => {
 const getTimeToUnstake = async (senderAddy) => {
   const network = new StacksMainnet();
   const contractAddress = 'SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8';
-  const contractName = 'badgers-build-discount';
+  const contractName = 'badgers-staking-discount';
   const functionName = 'get-time-remaining-to-unstake';
   const functionArgs = [principalCV(senderAddy)];
   const senderAddress = senderAddy;

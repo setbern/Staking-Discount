@@ -8,7 +8,7 @@ import { openContractCall } from "@stacks/connect";
 import { GraphQLClient, gql } from "graphql-request";
 
 const contractAddress = "SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8";
-const contractName = "badgers-build-discount";
+const contractName = "badgers-staking-discount";
 const handleSuccesModel = "";
 
 function StakeBtnSubmit() {
