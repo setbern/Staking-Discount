@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import { useAppState } from "../../state";
-import { listCV, uintCV } from "@stacks/transactions";
 import { StacksMainnet } from "@stacks/network";
-import { AnchorMode, PostConditionMode } from "@stacks/transactions";
 import { openContractCall } from "@stacks/connect";
 
 import { GraphQLClient, gql } from "graphql-request";
+
+import {
+  FungibleConditionCode,
+  AnchorMode,
+  makeStandardSTXPostCondition,
+  uintCV,
+  PostCondition,
+  listCV,
+  makeStandardNonFungiblePostCondition,
+  NonFungibleConditionCode,
+  createAssetInfo,
+  PostConditionMode,
+} from "@stacks/transactions";
 
 const contractAddress = "SP3D03X5BHMNSAAW71NN7BQRMV4DW2G4JB3MZAGJ8";
 const contractName = "badgers-staking-discount";
@@ -18,23 +29,59 @@ function StakeBtnSubmit() {
   const [err, setErr] = useState(false);
 
   const { selectedItems, _selectedItems, senderAddress } = useAppState();
+
+  const postConditionCode = 16;
+
+  const badgersAssetInfo = createAssetInfo(
+    "SP27F9EJH20K3GT6GHZG0RD08REZKY2TDMD6D9M2Z",
+    "btc-badgers-v2",
+    "btc-badgers-nft-v2"
+  );
+
+  const babyBadgersAssetInfo = createAssetInfo(
+    "SP27F9EJH20K3GT6GHZG0RD08REZKY2TDMD6D9M2Z",
+    "baby-badgers",
+    "baby-badgers"
+  );
+
   const btcBadgersItems = selectedItems.filter(
     (item) => item.asset_id === "btc-badgers-nft-v2"
-  );
-  const babyBadgersItems = selectedItems.filter(
-    (item) => item.asset_id === "baby-badgers"
   );
 
   const btcBadgersTokenIds = btcBadgersItems.map((item) =>
     uintCV(parseInt(item.token_id))
   );
+
+  const badgerStakePC = btcBadgersTokenIds.map((d, i) => {
+    return makeStandardNonFungiblePostCondition(
+      senderAddress,
+      postConditionCode,
+      badgersAssetInfo,
+      d
+    );
+  });
+
+  const babyBadgersItems = selectedItems.filter(
+    (item) => item.asset_id === "baby-badgers"
+  );
+
   const babyBadgersTokenIds = babyBadgersItems.map((item) =>
     uintCV(parseInt(item.token_id))
   );
+
+  const bayBadegersPC = babyBadgersTokenIds.map((d, i) => {
+    return makeStandardNonFungiblePostCondition(
+      senderAddress,
+      postConditionCode,
+      babyBadgersAssetInfo,
+      d
+    );
+  });
+
   console.log(btcBadgersItems);
 
-  const args = [listCV(btcBadgersTokenIds), listCV(babyBadgersTokenIds)];
-
+  const pc = [...badgerStakePC, ...bayBadegersPC];
+  console.log("pc", pc);
   const handleStake = async () => {
     try {
       if (validateEmail(email)) {
@@ -51,9 +98,9 @@ function StakeBtnSubmit() {
           senderKey: senderAddress,
           validateWithAbi: true,
           network: new StacksMainnet(),
-          postConditions: [],
+
           anchorMode: AnchorMode.Any,
-          postConditionMode: PostConditionMode.Allow,
+          postConditions: pc,
           onFinish: (data) => {
             handleAddEmail(data.txId, email);
             return;
@@ -68,7 +115,7 @@ function StakeBtnSubmit() {
         // perform any necessary actions with valid email
       } else {
         setIsValid(false);
-        // setErr("Please enter a valid email address");
+        setErr("Please enter a valid email address");
 
         return;
       }
@@ -117,10 +164,8 @@ function StakeBtnSubmit() {
   };
 
   return (
-    <>
-      <div className="flex flex-col  p-2">
-        {(err || !isValid) && <span className="text-red-500">{err}</span>}
-
+    <div className="flex flex-col items-center relative">
+      <div className="flex flex-col  p-2 relative">
         <label htmlFor="email"></label>
         <input
           type="text"
@@ -131,7 +176,7 @@ function StakeBtnSubmit() {
           onChange={handleEmailChange}
         />
       </div>
-      <div>
+      <div className="m-auto">
         <button
           className="border rounded-full h-[48px] w-[145px] bg-[#5446F4] text-white font-bold mt-1"
           onClick={() => handleStake()}
@@ -144,7 +189,12 @@ function StakeBtnSubmit() {
           </div>
         </button>
       </div>
-    </>
+      {(err || !isValid) && (
+        <span className="absolute z-10 bottom-[-30px] text-red-500 w-80  text-sm  text-center">
+          {err}
+        </span>
+      )}
+    </div>
   );
 }
 
